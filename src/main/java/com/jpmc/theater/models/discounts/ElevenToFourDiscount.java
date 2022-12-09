@@ -13,7 +13,7 @@ public class ElevenToFourDiscount implements Discount{
     public boolean isDiscountApplicable(Movie movie, Showing showing) {
         LocalDateTime elevenAM = LocalDateTime.of(showing.getStartTime().toLocalDate(), LocalTime.of(11, 0));
         LocalDateTime fourPM = LocalDateTime.of(showing.getStartTime().toLocalDate(), LocalTime.of(16,0));
-        return !(showing.getStartTime().isBefore(elevenAM) && showing.getStartTime().isAfter(fourPM));
+        return !(showing.getStartTime().isBefore(elevenAM) || showing.getStartTime().isAfter(fourPM));
     }
 
     @Override

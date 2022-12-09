@@ -16,8 +16,6 @@ public class ReservationService {
 
     private DiscountService discountService;
 
-    private double cost;
-
     public static ReservationService getInstance(){
         if (instance == null){
             instance = new ReservationService();
@@ -30,11 +28,11 @@ public class ReservationService {
         // Typically populate from database here.
         this.reservations = new ArrayList<Reservation>();
         this.discountService = DiscountService.getInstance();
-        this.cost = 0;
     }
 
     public void reserve(Reservation reservation){
-        this.cost = this.calculateTicketPrice(reservation) * reservation.getAudienceCount();
+        double x = this.calculateTicketPrice(reservation);
+        reservation.setCost(this.calculateTicketPrice(reservation) * reservation.getAudienceCount());
     }
 
     public ArrayList<Reservation> getReservations(){
@@ -42,6 +40,6 @@ public class ReservationService {
     }
 
     private double calculateTicketPrice(Reservation reservation){
-        return this.discountService.calculateMoviePrice(reservation.getShowing().getMovie(), reservation.getShowing());
+        return reservation.getShowing().getMovieFee() - this.discountService.calculateDiscountPrice(reservation.getShowing().getMovie(), reservation.getShowing());
     }
 }

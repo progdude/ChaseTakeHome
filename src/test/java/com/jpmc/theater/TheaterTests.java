@@ -11,14 +11,19 @@ public class TheaterTests {
     void totalFeeForCustomer() {
         Theater theater = new Theater();
         Customer john = new Customer("John Doe", "id-12345");
-        Reservation reservation = theater.reserve(john, 2, 4);
-//        System.out.println("You have to pay " + reservation.getTotalFee());
-        assertEquals(reservation.totalFee(), 50);
+        Reservation reservation = theater.reserve(john, 1, 4);
+        assertEquals(reservation.totalFee(), 32);
     }
 
     @Test
-    void printMovieSchedule() {
-//        Theater theater = new Theater(Lo.singleton());
-//        theater.printSchedule();
+    void printMovieScheduleSimpleText() {
+        Theater theater = new Theater();
+        theater.printSimpleText();
+    }
+
+    @Test
+    void printMovieScheduleJSON() {
+        Theater theater = new Theater();
+        theater.printJson();
     }
 }

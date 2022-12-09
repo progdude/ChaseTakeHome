@@ -32,13 +32,13 @@ public class DiscountService {
                         new ElevenToFourDiscount(),
                         new FirstOfTheDayDiscount(),
                         new SecondOfTheDayDiscount(),
-                        new SecondOfTheDayDiscount(),
+                        new SeventhOfTheMonthDiscount(),
                         new SpecialMovieDiscount()
                 )
         );
     }
 
-    public double calculateMoviePrice(Movie movie, Showing showing){
+    public double calculateDiscountPrice(Movie movie, Showing showing){
 
         double maxPrice = 0;
         for(Discount discount: this.discounts){
