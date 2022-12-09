@@ -1,7 +1,10 @@
-package com.jpmc.theater;
+package com.jpmc.theater.models;
 
 import java.util.Objects;
 
+/**
+ * Class to represent the Customer Object
+ */
 public class Customer {
 
     private String name;
@@ -13,11 +16,9 @@ public class Customer {
      * @param id customer id
      */
     public Customer(String name, String id) {
-        this.id = id; // NOTE - id is not used anywhere at the moment
-
+        this.id = id;
         this.name = name;
-
-        }
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -35,5 +36,13 @@ public class Customer {
     @Override
     public String toString() {
         return "name: " + name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getId() {
+        return id;
     }
 }

@@ -1,5 +1,7 @@
 package com.jpmc.theater;
 
+import com.jpmc.theater.models.Movie;
+import com.jpmc.theater.models.Showing;
 import org.junit.jupiter.api.Test;
 
 import java.time.Duration;

@@ -1,4 +1,4 @@
-package com.jpmc.theater;
+package com.jpmc.theater.models;
 
 import java.time.LocalDateTime;
 
@@ -21,19 +21,11 @@ public class Showing {
         return showStartTime;
     }
 
-    public boolean isSequence(int sequence) {
-        return this.sequenceOfTheDay == sequence;
-    }
-
     public double getMovieFee() {
         return movie.getTicketPrice();
     }
 
     public int getSequenceOfTheDay() {
         return sequenceOfTheDay;
-    }
-
-    private double calculateFee(int audienceCount) {
-        return movie.calculateTicketPrice(this) * audienceCount;
     }
 }

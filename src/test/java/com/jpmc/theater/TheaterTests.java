@@ -1,5 +1,7 @@
 package com.jpmc.theater;
 
+import com.jpmc.theater.models.Customer;
+import com.jpmc.theater.models.Reservation;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
