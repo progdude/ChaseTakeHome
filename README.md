@@ -27,3 +27,18 @@ This is a poorly written application, and we're expecting the candidate to great
   * Any movies showing on 7th, you'll get 1$ discount
   * The discount amount applied only one if met multiple rules; biggest amount one
 * We want to print the movie schedule with simple text & json format
+
+## Improvments
+
+While I made some major changes to this codebase, there's a lot more that could still be done. 
+This project was timeboxed for 2 hours, so a lot of the improvemnts were out of the scope.
+Some things to improve(but not all):
+ * Make all my services thread safe
+ * Implement better testing (very rough testing right now)
+ * Use persistent storage for all the data rather than hardcoding
+ * Make better connections between the Services
+ * Use a framework like Java Spring to better manage the services and create an API
+ * And many, many more!
+
+For the inital new requirements, you can find all the Discount rules in `models/discounts` and they are used in the `DiscountService`
+For the printing, you can find all the necessary details in `services/printing`
