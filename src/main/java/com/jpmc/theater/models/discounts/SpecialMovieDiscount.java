@@ -3,7 +3,7 @@ package com.jpmc.theater.models.discounts;
 import com.jpmc.theater.models.Movie;
 import com.jpmc.theater.models.Showing;
 
-public class SpecialMovieDiscount implements Discount{
+public class SpecialMovieDiscount implements Discount {
 
     private static int MOVIE_CODE_SPECIAL = 1;
 

@@ -35,7 +35,7 @@ public class Movie {
         return ticketPrice;
     }
 
-    public int getSpecialCode(){
+    public int getSpecialCode() {
         return specialCode;
     }
 
@@ -44,11 +44,11 @@ public class Movie {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Movie movie = (Movie) o;
-        return Double.compare(movie.ticketPrice, ticketPrice) == 0
-                && Objects.equals(title, movie.title)
-                && Objects.equals(description, movie.description)
-                && Objects.equals(runningTime, movie.runningTime)
-                && Objects.equals(specialCode, movie.specialCode);
+        return Double.compare(movie.ticketPrice, ticketPrice) == 0 &&
+                Objects.equals(title, movie.title) &&
+                Objects.equals(description, movie.description) &&
+                Objects.equals(runningTime, movie.runningTime) &&
+                Objects.equals(specialCode, movie.specialCode);
     }
 
     @Override
