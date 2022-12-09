@@ -1,6 +1,7 @@
 package com.jpmc.theater.models;
 
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 
 public class Showing {
     private Movie movie;
@@ -18,7 +19,7 @@ public class Showing {
     }
 
     public LocalDateTime getStartTime() {
-        return showStartTime;
+        return this.showStartTime;
     }
 
     public double getMovieFee() {

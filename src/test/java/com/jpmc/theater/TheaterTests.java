@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TheaterTests {
     @Test
     void totalFeeForCustomer() {
-        Theater theater = new Theater(LocalDateProvider.singleton());
+        Theater theater = new Theater();
         Customer john = new Customer("John Doe", "id-12345");
         Reservation reservation = theater.reserve(john, 2, 4);
 //        System.out.println("You have to pay " + reservation.getTotalFee());
@@ -18,7 +18,7 @@ public class TheaterTests {
 
     @Test
     void printMovieSchedule() {
-        Theater theater = new Theater(LocalDateProvider.singleton());
-        theater.printSchedule();
+//        Theater theater = new Theater(Lo.singleton());
+//        theater.printSchedule();
     }
 }

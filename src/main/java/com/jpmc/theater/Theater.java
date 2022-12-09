@@ -4,6 +4,10 @@ import com.jpmc.theater.models.Customer;
 import com.jpmc.theater.models.Movie;
 import com.jpmc.theater.models.Reservation;
 import com.jpmc.theater.models.Showing;
+import com.jpmc.theater.services.*;
+import com.jpmc.theater.services.printing.JsonPrintingService;
+import com.jpmc.theater.services.printing.PrintingService;
+import com.jpmc.theater.services.printing.SimpleTextPrintingService;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -13,47 +17,49 @@ import java.util.concurrent.TimeUnit;
 
 public class Theater {
 
-    LocalDateProvider provider;
-    private List<Showing> schedule;
+    private ReservationService reservationService;
+    private ShowingService showingService;
+    private CustomerService customerService;
+    private MovieService movieService;
+    private LocalDateProviderService localDateProviderService;
+    private JsonPrintingService jsonPrintingService;
+    private SimpleTextPrintingService simpleTextPrintingService;
 
-    public Theater(LocalDateProvider provider) {
-        this.provider = provider;
+    public Theater() {
+        this.reservationService = ReservationService.getInstance();
+        this.showingService = ShowingService.getInstance();
+        this.customerService = CustomerService.getInstance();
+        this.movieService = MovieService.getInstance();
+        this.localDateProviderService = LocalDateProviderService.getInstance();
+        this.jsonPrintingService = JsonPrintingService.getInstance();
+        this.simpleTextPrintingService = SimpleTextPrintingService.getInstance();
     }
 
-    public Reservation reserve(Customer customer, int sequence, int howManyTickets) {
+    public Reservation reserve(Customer customer, int sequence, int ticketAmount) {
         Showing showing;
+        Reservation reservation;
         try {
-            showing = this.schedule.get(sequence - 1);
+            showing = this.showingService.GetShowings().get(sequence-1);
+            reservation = new Reservation(customer, showing, ticketAmount);
+            this.reservationService.reserve(reservation);
         } catch (RuntimeException ex) {
             ex.printStackTrace();
             throw new IllegalStateException("not able to find any showing for given sequence " + sequence);
         }
-        return new Reservation(customer, showing, howManyTickets);
+        return reservation;
     }
 
-    public void printSchedule() {
-        System.out.println(provider.currentDate());
-        System.out.println("===================================================");
-        schedule.forEach(s ->
-                System.out.println(s.getSequenceOfTheDay() + ": " + s.getStartTime() + " " + s.getMovie().getTitle() + " " + humanReadableFormat(s.getMovie().getRunningTime()) + " $" + s.getMovieFee())
-        );
-        System.out.println("===================================================");
+    public void printJson(){
+        this.jsonPrintingService.printSchedule();
     }
 
-    public String humanReadableFormat(Duration duration) {
-        long hour = duration.toHours();
-        long remainingMin = duration.toMinutes() - TimeUnit.HOURS.toMinutes(duration.toHours());
-
-        return String.format("(%s hour%s %s minute%s)", hour, handlePlural(hour), remainingMin, handlePlural(remainingMin));
+    public void printSimpleText(){
+        this.simpleTextPrintingService.printSchedule();
     }
 
-    // (s) postfix should be added to handle plural correctly
-    private String handlePlural(long value) {
-        if (value == 1) {
-            return "";
-        }
-        else {
-            return "s";
-        }
+    public static void main(String[] args) {
+        Theater theater = new Theater();
+        theater.printSimpleText();
+        theater.printJson();
     }
 }
